@@ -30,7 +30,7 @@ RegisterCommand("jail", function(source, args, rawCommand)
   local targetPedId = args[1]
   local jailTime = tonumber(args[2]) or 0
   local jailCharges = args[3]
-  if isPolice(GetEntityModel(GetPlayerPed())) then
+  if isPolice(GetEntityModel(GetPlayerPed(PlayerId()))) then
     if targetPedId == nil then
       return TriggerEvent("chatMessage", "^1You must enter the suspect's ID number.")
     elseif jailTime <= 0 then
@@ -48,7 +48,7 @@ end)
 RegisterCommand("unjail", function(source, args, rawCommand)
   local _source = source
   local targetPedId = args[1]
-  if isPolice(GetEntityModel(GetPlayerPed())) then
+  if isPolice(GetEntityModel(GetPlayerPed(PlayerId()))) then
     if targetPedId == nil then
       return TriggerEvent("chatMessage", "^1You must enter the prisoner's ID number.")
     else
@@ -199,8 +199,7 @@ Citizen.CreateThread(function()
   end
 end)
 
-AddEventHandler("playerSpawned", function(spawnInfo)
-  TriggerServerEvent("jnj:checkJailed")
+Citizen.CreateThread(function()
   local courthouseBlip = AddBlipForCoord(JailConfig.courtEntraceLocation.x, JailConfig.courtEntraceLocation.y, JailConfig.courtEntraceLocation.z)
   SetBlipSprite(courthouseBlip, 419)
   SetBlipDisplay(courthouseBlip, 4)
@@ -209,4 +208,8 @@ AddEventHandler("playerSpawned", function(spawnInfo)
   BeginTextCommandSetBlipName("STRING")
   AddTextComponentString("Superior Court of " .. JailConfig.stateName)
   EndTextCommandSetBlipName(courthouseBlip)
+end)
+
+AddEventHandler("playerSpawned", function(spawnInfo)
+  TriggerServerEvent("jnj:checkJailed")
 end)

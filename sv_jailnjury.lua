@@ -24,6 +24,8 @@ local votes = 0
 local votesNeeded = 2
 local timeToVerdict = false
 
+local courtOngoing = false
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
@@ -44,13 +46,14 @@ Citizen.CreateThread(function()
       local hasRequestedTrial = isJailedInfo[4]
       TriggerClientEvent("chatMessage", _source, "^1Requesting a trial... Please Wait...")
       Citizen.Wait(math.random(5000, 15000))
-      if jailedTime >= 10 and hasRequestedTrial ~= true then
+      if jailedTime >= 10 and hasRequestedTrial ~= true and courtOngoing ~= true then
         updateTrialRequest(targetPedPermId, true)
         TriggerClientEvent("chatMessage", _source, "^1Your request for trial has been approved, and your jail time has been paused... The court case will start soon...")
         TriggerClientEvent("chatMessage", _source, "^1Once the court case starts, you will have 1 minutes to explain your charge(s) to the jury: ^2" .. jailedCharges .. "^1.")
         TriggerClientEvent("chatMessage", -1, "^1Jurors are needed at the courthouse for a court case. Be there within " .. JailConfig.courtStartTime .. "  minutes to enter the juror pool.")
         TriggerClientEvent("jnj:courtCaseStatus", _source, true)
         TriggerClientEvent("jnj:courtCaseStatusAll", -1, true)
+        courtOngoing = true
         Citizen.Wait(1000 * 60 * 5)
         TriggerEvent("jnj:startCourtCase", _source)
       else
@@ -148,6 +151,7 @@ Citizen.CreateThread(function()
     local jailCharges = isJailedInfo[3]
     if #jurors < 3 then
       jurors = {}
+      courtOngoing = false
       TriggerClientEvent("jnj:courtCaseStatus", targetPedId, false)
       TriggerClientEvent("jnj:courtCaseStatusAll", -1, false)
       TriggerClientEvent("chatMessage", -1, "^1The court case has been cancelled due to juror availability.")
@@ -218,6 +222,7 @@ Citizen.CreateThread(function()
       end
       TriggerClientEvent("jnj:courtCaseStatusAll", -1, false)
       jurors = {}
+      courtOngoing = false
     end
   end)
 end)

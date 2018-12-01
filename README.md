@@ -57,3 +57,4 @@ The configuration file is located in `sh_config.lua`
 
 ## Pictures
 ![Map Image of Courthouse](https://i.imgur.com/SHSOipy.jpg)
+![Map Image of Court Area](https://i.imgur.com/41OIp84.jpg)

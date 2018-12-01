@@ -52,7 +52,6 @@ The configuration file is located in `sh_config.lua`
 | `JailConfig.prisonEntraceLocation` |  This an array that the system interprets as a vector for the entrance to the prison. This is where arrestees are sent after they are released.
 
 ## Credits
-- [@rxi](https://github.com/rxi) - [json.lua](https://github.com/rxi/json.lua) - Rxi supplies the lightweight json lua encoding and decoding library this resource uses to save jailed players.
 - [Gaming-Asylum](http://www.gaming-asylum.com/forums/index.php) - [Gaming-Asylum-Wiki](http://gaming-asylumwiki.com/wiki/Prison_Guide) - Gaming Asylum Servers have a similar jail and justice system on their Arma 3 servers. I drew inspiration from this server because their system is very effective and fun.
 
 ## Pictures

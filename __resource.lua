@@ -28,7 +28,6 @@ client_scripts {
 }
 
 server_scripts {
-  "json.lua",
   "sh_config.lua",
   "sv_jailnjury.lua"
 }

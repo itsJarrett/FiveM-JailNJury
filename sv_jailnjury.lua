@@ -236,5 +236,4 @@ AddEventHandler("jnj:requestJuror", function(insideRange)
       TriggerClientEvent("chatMessage", _source, "^1You have entered the juror pool. You will be notified soon if you will make it through the selection process. Do not leave the courthouse.")
     end
   end
-  print(json.encode(jurors))
 end)

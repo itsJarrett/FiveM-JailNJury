@@ -148,7 +148,7 @@ Citizen.CreateThread(function()
     local jailCharges = isJailedInfo[3]
     if #jurors < 3 then
       jurors = {}
-      TriggerClientEvent("jnj:courtCaseStatus", targetPedPermId, false)
+      TriggerClientEvent("jnj:courtCaseStatus", targetPedId, false)
       TriggerClientEvent("jnj:courtCaseStatusAll", -1, false)
       TriggerClientEvent("chatMessage", -1, "^1The court case has been cancelled due to juror availability.")
     else

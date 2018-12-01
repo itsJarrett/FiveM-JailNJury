@@ -27,8 +27,10 @@ JailConfig.jailFile = "jailed.json"
 JailConfig.stateName = "San Andreas"
 
 JailConfig.policePeds = {
-  "s_m_y_cop_01",
-  "s_f_y_cop_01"
+  "s_m_y_hwaycop_01",
+  "s_m_y_sheriff_01",
+  "s_m_y_swat_01",
+  "s_m_y_cop_01"
 }
 
 JailConfig.courtStartTime = 5
@@ -71,8 +73,8 @@ function isPolice(modelHash)
     if modelHash == GetHashKey(policePed) then
       return true
     end
-    return false
   end
+  return false
 end
 
 function isJailed(permId)
@@ -80,8 +82,8 @@ function isJailed(permId)
     if permId == jailedPlayer[1] then
       return jailedPlayer
     end
-    return false
   end
+  return false
 end
 
 function updateJailTime(permId, newTime)
@@ -118,8 +120,8 @@ function inJurorPool(id)
     if id == juror then
       return true
     end
-    return false
   end
+  return false
 end
 
 function removeJuror(id)

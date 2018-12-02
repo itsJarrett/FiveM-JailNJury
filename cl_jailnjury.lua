@@ -86,11 +86,12 @@ AddEventHandler("jnj:teleportToCourt", function(pmuted, vector)
   SetEntityCoords(targetPed, vector.x, vector.y, vector.z, 0.0, 0.0, 0.0, false)
   SetEntityHeading(targetPed, vector.h)
   FreezeEntityPosition(targetPed, true)
-  if not pmuted then
+  if pmuted then
+    muted = true
+  else
+    muted = false
     DisableControlAction(0, 245, false)
     DisableControlAction(0, 249, false)
-  else
-    muted = true
   end
 end)
 

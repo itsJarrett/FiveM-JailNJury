@@ -30,7 +30,9 @@ JailConfig.policePeds = {
   "s_m_y_hwaycop_01",
   "s_m_y_sheriff_01",
   "s_m_y_swat_01",
-  "s_m_y_cop_01"
+  "s_m_y_cop_01",
+  "MP_F_Freemode_01",
+  "MP_M_Freemode_01"
 }
 
 JailConfig.courtStartTime = 5

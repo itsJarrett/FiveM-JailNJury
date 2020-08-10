@@ -27,9 +27,12 @@ local notifyCourtHouseOut = false
 
 RegisterCommand("jail", function(source, args, rawCommand)
   local _source = source
-  local targetPedId = args[1]
+  local targetPedId = tonumber(args[1])
   local jailTime = tonumber(args[2]) or 0
   local jailCharges = args[3]
+  local x1, y1, z1 = table.unpack( GetEntityCoords( GetPlayerPed( GetPlayerFromServerId(source) ), true ) )
+  local x2, y2, z2 = table.unpack( GetEntityCoords( GetPlayerPed( GetPlayerFromServerId(targetPedId) ), true ) )
+  local distance = math.floor(GetDistanceBetweenCoords(x1,  y1,  z1,  x2,  y2,  z2,  true))
   if isPolice(GetEntityModel(GetPlayerPed(PlayerId()))) then
     if targetPedId == nil then
       return TriggerEvent("chatMessage", "^1You must enter the suspect's ID number.")
@@ -38,10 +41,14 @@ RegisterCommand("jail", function(source, args, rawCommand)
     elseif jailCharges == nil then
       return TriggerEvent("chatMessage", "^1You must enter the suspect's charges.")
     else
-      TriggerServerEvent("jnj:sendToJail", targetPedId, jailTime, jailCharges)
+      if (distance <= 10) then 
+        TriggerServerEvent("jnj:sendToJail", targetPedId, jailTime, jailCharges)
+      else
+        TriggerEvent('chatMessage', "^1ERROR: That player is too far from you...")
+      end 
     end
   else
-    TriggerEvent("chatMessage", "^1You are not authorized to use this command. Consider joining a Police Department.")
+      TriggerEvent("chatMessage", "^1You are not authorized to use this command. Consider joining a Police Department.")
   end
 end)
 
